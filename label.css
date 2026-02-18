@@ -1,0 +1,25 @@
+/* --- Estilos del label --- */
+.input-group label {
+    font-size: 14px; /* Tamaño más pequeño para hacer que sea más compacto */
+    font-weight: 600; /* Mantener un peso de fuente adecuado */
+    color: #333; /* Color de texto oscuro para buen contraste */
+    margin-bottom: 4px; /* Reducir el margen inferior para acercarlo al input */
+    text-transform: uppercase; /* Convertir a mayúsculas */
+    letter-spacing: 1px; /* Ligero espaciado entre letras */
+    display: block; /* Asegura que el label ocupe toda la línea */
+    transition: all 0.3s ease-in-out; /* Transición suave para hover */
+}
+
+/* --- Efecto hover para el label --- */
+.input-group label:hover {
+    color: #b27b1f; /* Cambiar color a dorado al pasar el ratón */
+    transform: scale(1.05); /* Efecto ligero al pasar el ratón */
+}
+
+/* --- Estilos del label cuando el input está enfocado --- */
+.input-group input:focus + label,
+.input-group select:focus + label {
+    color: #b27b1f; /* Cambiar a dorado cuando el input está enfocado */
+    font-weight: bold; /* Resaltar el texto al enfocarse en el input */
+    transform: scale(1.05); /* Efecto de tamaño al enfocarse */
+}

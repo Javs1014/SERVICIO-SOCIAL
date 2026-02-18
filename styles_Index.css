@@ -1,0 +1,223 @@
+/* --- Evitar desplazamiento horizontal en toda la página --- */
+html, body {
+    overflow-x: hidden !important; /* Elimina la barra de desplazamiento horizontal */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* --- Barra lateral fija sin desbordamiento --- */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* --- Ocultar la barra lateral cuando está colapsada --- */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* --- Estilos del título en la barra lateral --- */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+.sidebar p {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* --- Menú de navegación en la barra lateral --- */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* --- Estilos de los enlaces del menú --- */
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #b27b1f;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* --- Iconos dentro de los enlaces del menú --- */
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* --- Efecto hover en los enlaces --- */
+.sidebar a:hover {
+    background-color: #8c5d15;
+}
+
+/* --- Ajuste del botón CERRAR --- */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121;
+}
+
+/* --- Botón de hamburguesa para ocultar la barra lateral --- */
+.sidebar-toggle {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #b27b1f;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* --- Ajuste del contenido para evitar desbordes --- */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: calc(100vw - 250px);
+    box-sizing: border-box;
+}
+
+/* --- Cuando la barra lateral está colapsada --- */
+.content.collapsed {
+    margin-left: 0;
+    max-width: 100vw;
+}
+
+/* --- Cuadro de presentación --- */
+.presentation {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+    margin-top: 50px;
+    width: 60%;
+    max-width: 800px;
+}
+
+/* --- Títulos en la presentación --- */
+.presentation h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.presentation h2 {
+    font-size: 20px;
+    color: #444;
+}
+
+.presentation .highlight {
+    color: #b27b1f;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* --- Caja secundaria dentro de la presentación --- */
+.presentation .sub-box {
+    background-color: #f4f4f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.download-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #FFD700; /* color oro */
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+.download-button:hover {
+    background-color: #b27b1f;
+    transform: scale(1.05);
+}
+
+
+/* --- Logo dentro de la presentación --- */
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+/* --- Ajuste para pantallas pequeñas --- */
+@media (max-width: 600px) {
+    .content {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .upload-box {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,295 @@
+/* --- Evitar desplazamiento horizontal --- */
+html, body {
+    height: 100vh;
+    overflow: hidden; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* --- Barra lateral fija sin desbordamiento --- */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f; /* Color dorado */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: transform 0.4s ease, width 0.4s ease;
+}
+
+/* --- Ocultar la barra lateral cuando está colapsada --- */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 0;
+}
+
+/* --- Estilos del título y descripción en la barra lateral --- */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.sidebar p {
+    font-size: 12px;
+    text-align: center;
+}
+
+/* --- Menú de navegación --- */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background-color: #8c5d15;
+}
+
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* --- Botón de cerrar sesión --- */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121;
+}
+
+/* --- Botón de hamburguesa fijo --- */
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8c5d15; /* Mejor contraste */
+    border: none;
+    cursor: pointer;
+    z-index: 1200;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #b27b1f;
+}
+
+/* --- Contenido principal centrado y con tamaño grande --- */
+.content {
+    height: 100vh;
+    margin-left: 270px;
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: margin-left 0.4s ease;
+    width: calc(100vw - 270px);
+    
+}
+
+/* --- Cuando la barra lateral está colapsada --- */
+.content.collapsed {
+    margin-left: 0;
+}
+
+/* --- Contenedor general del repositorio --- */
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Contenedor de los detalles del documento --- */
+.document-detail-container {
+    max-width: 600px; /* Tamaño más grande */
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* --- Animación de entrada --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Título del documento --- */
+.document-detail-container h2 {
+    font-size: 28px;
+    color: #b27b1f; /* Dorado */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* --- Imagen del documento con tamaño optimizado --- */
+.document-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* --- Información del documento --- */
+.document-info {
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.document-info p {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    background: #f9f9f9;
+}
+
+/* --- Botón de regreso al buscador --- */
+.back-btn {
+    display: inline-block;
+    background: #b27b1f;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.back-btn:hover {
+    background: #8a5f15;
+    transform: scale(1.05);
+}
+
+/* --- Responsivo para pantallas pequeñas --- */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+    }
+
+    .document-detail-container {
+        width: 90%;
+    }
+
+    .document-info p {
+        font-size: 16px;
+    }
+}
+
+/* --- Ajuste de tarjetas y elementos del repositorio --- */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card h3 {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 2px 0;
+    color: gray;
+}
+
+.details-btn {
+    display: block;
+    text-align: center;
+    background: #8c5d15;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 0 0 10px 10px;
+}
+
+.details-btn:hover {
+    background: #b27b1f;
+}

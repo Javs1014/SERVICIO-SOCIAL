@@ -1,0 +1,493 @@
+
+    /* ESTILOS GENERALES Y ESTRUCTURA PRINCIPAL */
+    html, body {
+        overflow-x: hidden !important; /* Oculta el scroll horizontal */
+        width: 100%; /* Ocupa todo el ancho */
+        margin: 0; /* Sin márgenes */
+        padding: 0; /* Sin padding */
+        font-family: Arial, sans-serif; /* Fuente principal */
+        background-color: #f4f4f9; /* Color de fondo */
+        display: flex; /* Usa flexbox */
+        box-sizing: border-box; /* Modelo de caja más intuitivo */
+    }
+
+    /* BARRA LATERAL (SIDEBAR) */
+    .sidebar {
+        width: 250px; /* Ancho fijo */
+        max-width: 250px; /* Máximo ancho */
+        background-color: #b27b1f; /* Color café dorado */
+        color: white; /* Texto blanco */
+        padding: 20px; /* Espaciado interno */
+        height: 100vh; /* Altura completa de la ventana */
+        position: fixed; /* Posición fija */
+        display: flex; /* Flexbox para organización */
+        flex-direction: column; /* Elementos en columna */
+        justify-content: space-between; /* Espacio entre elementos */
+        overflow-y: auto; /* Scroll vertical si es necesario */
+        overflow-x: hidden; /* Sin scroll horizontal */
+        box-sizing: border-box; /* Modelo de caja */
+        transition: transform 0.4s ease, width 0.4s ease; /* Transiciones suaves */
+    }
+
+    /* Estado colapsado del sidebar */
+    .sidebar.collapsed {
+        transform: translateX(-100%); /* Oculta desplazando a la izquierda */
+    }
+
+    /* Estilos del título en el sidebar */
+    .sidebar h2 {
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        border-bottom: 1px solid white;
+        padding-bottom: 10px;
+        margin-top: 40px;
+    }
+
+    /* Texto descriptivo debajo del título */
+    .sidebar p {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    /* Menú de navegación */
+    .sidebar .menu {
+        flex-grow: 1; /* Ocupa el espacio disponible */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 15px; /* Espacio entre elementos */
+    }
+
+    /* Estilos de los enlaces del menú */
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        text-align: left;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+    }
+
+    /* Botón de logout */
+    .sidebar .logout {
+        margin-top: auto; /* Lo posiciona al final */
+        padding: 10px;
+        text-align: center;
+        background-color: #b27b1f;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Efecto hover para el botón de logout */
+    .sidebar .logout:hover {
+        background-color: #a02121; /* Rojo al hacer hover */
+    }
+
+    /* Efecto hover para los enlaces */
+    .sidebar a:hover {
+        background-color: #8c5d15; /* Café más oscuro */
+    }
+
+
+    /* BOTÓN DE HAMBURGUESA */
+
+    .sidebar-toggle {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #8c5d15;
+        border: none;
+        cursor: pointer;
+        z-index: 1200; /* Por encima de otros elementos */
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s ease;
+    }
+
+    /* Icono del botón hamburguesa */
+    .sidebar-toggle i {
+        font-size: 22px;
+        color: white;
+    }
+
+    /* Efecto hover del botón */
+    .sidebar-toggle:hover {
+        background: #b27b1f;
+    }
+
+    /* CONTENIDO PRINCIPAL */
+    .content {
+        margin-left: 250px; /* Espacio para el sidebar */
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 90vh;
+        height: 100%;
+        width: calc(100vw - 250px);
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        overflow-y: auto;
+        padding-bottom: 50px;
+        transition: all 0.4s ease;
+    }
+
+    /* Ajuste cuando el sidebar está colapsado */
+    .content.collapsed {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+
+
+    /* CONTENEDOR DE REPOSITORIO */
+    .container {
+        max-width: 90%;
+        width: 100%;
+        min-height: 80vh;
+        background: white;
+        padding: 20px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        border-radius: 10px;
+        padding-bottom: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título del repositorio */
+    .container h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+    }
+
+    /* FORMULARIO DE SUBIDA */
+    .upload-box {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        gap: 20px;
+        width: 100%; /* Aprovecha el ancho disponible */
+        max-width: 900px; /* Aumenta el tamaño */
+        box-sizing: border-box;
+        max-height: 90vh;
+        min-height: 80vh;
+        min-width: 80vh;    
+        display: flex;
+        padding-bottom: 30px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Título del formulario */
+    .upload-box h2 {
+        font-size: 22px; /* Tamaño más pequeño */
+        font-weight: bold; /* Negrita */
+        color: white; /* Letras blancas */
+        text-align: center; /* Centrado */
+        text-transform: uppercase; /* Mayúsculas */
+        letter-spacing: 2px; /* Espaciado entre letras */
+        margin-bottom: 15px; /* Espacio inferior más pequeño */
+        position: relative; /* Necesario para el pseudo-elemento */
+        padding: 10px; /* Espaciado interno */
+        background: #b27b1f; /* Fondo de color sólido */
+        border-radius: 8px; /* Bordes redondeados más suaves */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra suave */
+        position: relative;
+        top: -10px;
+    }
+
+    /* Efecto de subrayado para el título */
+    .upload-box h2::after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: white;
+        margin: 10px auto 0;
+        border-radius: 3px;
+    }
+
+    /* Efecto hover para el título */
+    .upload-box h2:hover {
+        background: #8c5d15;
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
+    }
+
+
+    /* ELEMENTOS DEL FORMULARIO */
+
+    /* Grupos de inputs */
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+
+    /* Estilos para inputs y selects */
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 8px;
+        border: 2px solid #aaa;
+        border-radius: 6px;
+        font-size: 14px;
+        background-color: #fafafa;
+        transition: all 0.3s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    /* Efectos hover y focus */
+    .input-group input:hover,
+    .input-group select:hover,
+    .input-group input:focus,
+    .input-group select:focus {
+        background-color: #e8e8e8;
+        border-color: #b27b1f;
+        outline: none;
+    }
+
+
+    /* BOTONES */
+    /* Contenedor de botones */
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        width: 100%;
+        position: relative;
+    }
+
+    /* Grupo de botones de tipo (Acta, Horario, Otros) */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Estilos de botones de tipo */
+    .button-group button {
+        background-color: #ccc;
+        color: #333;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    /* Estado activo y hover para botones de tipo */
+    .button-group button:hover,
+    .button-group button.active {
+        background-color: #b27b1f;
+        color: white;
+    }
+
+    /* Botón de guardar */
+    .button-save {
+        background: linear-gradient(135deg, #b27b1f, #8c5d15);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Efecto hover para botón guardar */
+    .button-save:hover {
+        background: #a8741b;
+        transform: translateY(-2px);
+        box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Botón de eliminar */
+    #deletePreviewBtn {
+        background: linear-gradient(135deg, #ff3333, #ff6666);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        right: 0;
+    }
+
+    /* Efecto hover para botón eliminar */
+    #deletePreviewBtn:hover {
+        background: #e62e2e;
+        transform: translateY(-2px);
+        box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ÁREA DE ARRASTRE DE ARCHIVOS */
+    .file-drop-area {
+        border: 3px dotted #ccc;
+        padding: 20px;
+        text-align: center;
+        border-radius: 6px;
+        margin: 15px auto; /* Centra horizontalmente */
+        background: #f9f9f9;
+        transition: border-color 0.3s ease-in-out;
+        width: 100%; /* Ajusta al ancho del formulario */
+        max-width: 400px; /* Tamaño máximo */
+        min-height: 200px; /* Mantiene proporción */
+        overflow: hidden; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Imagen en el área de arrastre */
+    .file-drop-area img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Texto en el área de arrastre */
+    .file-drop-area p, 
+    .file-drop-area i {
+        font-size: 16px;
+        font-weight: bold;
+        color: #555;
+        text-align: center;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    /* Efecto hover para el área */
+    .file-drop-area:hover {
+        border-color: #b27b1f;
+    }
+
+    /* DISPOSICIÓN DEL FORMULARIO - CORRECCIÓN */
+    .form-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch; /* Alineación arriba */
+        width: 100%;
+        min-height: 70vh;
+        gap: 20px;
+    }
+
+    /* Campos del formulario (izquierda) */
+    .form-fields {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 50%; /* Ocupa la mitad izquierda */
+        padding-right: 20px; /* Espacio para separar del área de subida */
+        position: relative;
+    }
+
+    /* Área de subida de archivos (derecha) */
+    .file-upload {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 50%; /* Ocupa la mitad derecha */
+        align-items: center; /* Centra el contenido */
+        justify-content: center; /* Centra verticalmente */
+    }
+
+    /* Área de arrastre de archivos (ajustada) */
+    .file-drop-area {
+        width: 100%; /* Se ajusta dentro del contenedor */
+        height: 100%; /* Igual altura que el formulario */
+        min-height: 350px; /* Altura mínima */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 3px dashed #ccc;
+        padding: 15px;
+        background: #f9f9f9;
+        transition: border-color 0.3s ease-in-out;
+        box-sizing: border-box; /* Evita que se salga del contenedor */
+    }
+
+    /* Versión móvil */
+    @media screen and (max-width: 768px) {
+        .form-container {
+            flex-direction: column;
+        }
+        
+        .form-fields, .file-upload {
+            max-width: 100%;
+            padding-right: 0;
+        }
+        
+        .file-drop-area {
+            min-height: 250px;
+            margin-top: 20px;
+        }
+    }
+
+    /* COMPONENTES ESPECÍFICOS */
+
+    /* Contenedor para el tipo "Otros" */
+    #otros-tipo-container {
+        transition: all 0.3s ease;
+    }
+
+    /* Label para el selector de tipo "Otros" */
+    #otros-tipo-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* Selector de tipo "Otros" */
+    #otros_tipo {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+    }
+
+    /* Campos académicos (para mostrar/ocultar) */
+    .campos-academicos {
+        transition: all 0.3s ease;
+    }

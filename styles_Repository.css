@@ -1,0 +1,301 @@
+/* --- Evitar desplazamiento horizontal --- */
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* --- Barra lateral fija sin desbordamiento --- */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f; /* Cambiado a dorado */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: transform 0.4s ease, width 0.4s ease; /* Transición más suave */
+}
+
+/* --- Ocultar la barra lateral cuando está colapsada --- */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 0; /* Colapsa el ancho para mayor fluidez */
+}
+
+/* --- Estilos del título y descripción en la barra lateral --- */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.sidebar p {
+    font-size: 12px;
+    text-align: center;
+}
+
+/* --- Menú de navegación alineado a la izquierda pero centrado verticalmente --- */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background-color: #8c5d15;
+}
+
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* --- Botón de cerrar (Se cambia a rojo al pasar el cursor) --- */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121;
+}
+
+/* --- Botón de hamburguesa bien posicionado --- */
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8c5d15; /* Mejor contraste */
+    border: none;
+    cursor: pointer;
+    z-index: 1200;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #b27b1f;
+}
+
+/* --- Ajuste del contenido cuando la barra está expandida --- */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: auto;
+    max-width: calc(100vw - 270px);
+    box-sizing: border-box;
+    transition: margin-left 0.4s ease; /* Transición suave del contenido */
+}
+
+/* --- Cuando la barra lateral está colapsada --- */
+.content.collapsed {
+    margin-left: 0;
+    max-width: 100vw;
+}
+
+/* --- Contenedor general del repositorio --- */
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Título del repositorio --- */
+.container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+/* --- Barra de búsqueda --- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* --- Filtros (botones de categoría) --- */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters button {
+    background-color: #8c5d15; /* Color más oscuro */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.filters button.active {
+    background-color: #b27b1f; /* Color dorado cuando está activo */
+}
+
+/* --- Contenedor de tarjetas --- */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* --- Tarjetas (documentos) --- */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+    overflow: hidden;
+}
+
+/* --- Imágenes dentro de las tarjetas --- */
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* --- Contenido de la tarjeta --- */
+.card-content {
+    padding: 10px;
+}
+
+/* --- Títulos dentro de la tarjeta --- */
+.card h3 {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* --- Texto dentro de la tarjeta --- */
+.card p {
+    margin: 2px 0;
+    color: gray;
+}
+
+/* --- Botón de detalles --- */
+.details-btn {
+    display: block;
+    text-align: center;
+    background: #8c5d15; /* Botón con el mismo color */
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 0 0 10px 10px;
+}
+
+.details-btn:hover {
+    background: #b27b1f;
+}
+
+.doc-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* --- Responsivo para tabletas --- */
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+
+    .content {
+        margin-left: 250px;
+        max-width: calc(100vw - 250px);
+    }
+}
+
+/* --- Responsivo para móviles --- */
+@media (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
+
+    .content {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+}
+
+/* --- Ajuste para pantallas pequeñas --- */
+@media (max-width: 600px) {
+    .content {
+        margin-left: 0;
+        max-width: 100vw;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 100vw;
+    }
+}

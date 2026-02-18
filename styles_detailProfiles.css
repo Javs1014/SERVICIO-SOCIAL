@@ -1,0 +1,509 @@
+/* --- Estilos Generales --- */
+html, body {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f9;
+    box-sizing: border-box;
+}
+
+/* --- Barra Lateral --- */
+/* --- Barra lateral fija sin desbordamiento --- */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f; /* Color dorado */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: transform 0.4s ease-in-out;
+}
+
+/* --- Ocultar la barra lateral cuando está colapsada --- */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 0;
+    overflow: hidden;
+    transition: transform 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+/* Cuando la barra lateral está cerrada, el contenido se centra */
+.sidebar.collapsed + main.content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Ajusta según el diseño deseado */
+    text-align: center;
+}
+
+/* --- Estilos del título y descripción en la barra lateral --- */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.sidebar p {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* --- Menú de navegación --- */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background-color: #8c5d15;
+}
+
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* --- Botón de cerrar sesión --- */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121;
+}
+
+/* --- Botón de hamburguesa fijo --- */
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8c5d15;
+    border: none;
+    cursor: pointer;
+    z-index: 1200;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #b27b1f;
+}
+
+/* --- Contenedor del contenido principal --- */
+main.content {
+    margin-left: 270px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transition: margin-left 0.4s ease-in-out;
+    width: calc(100% - 270px);
+}
+/* Cuando la barra lateral esté cerrada, centra el contenido */
+main.content.center {
+    transform: translateX(100px); /* Ajusta la distancia para que quede centrado */
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Ajusta el ancho según lo que necesites */
+    transition: margin-left 0.6s ease-in-out, width 0.6s ease-in-out;
+}
+/* --- Contenedor de Perfil --- */
+.profile-container {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #b27b1f;
+}
+
+.profile-header h2 {
+    font-size: 24px;
+    margin: 10px 0 5px 0;
+    color: #333;
+}
+
+.profile-header .department {
+    font-size: 18px;
+    color: #b27b1f;
+    font-weight: bold;
+    padding-top: 8px;
+    border-top: 2px solid #b27b1f;
+    width: 100%;
+    text-align: justify;
+    margin-top: 10px;
+    display: block;
+    padding-top: 10px;
+}
+
+/* --- Información del Profesor --- */
+.info-section {
+    flex-grow: 1;
+    background: #fff8e6;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Documentos de Formación --- */
+.documents {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Color Doctorado */
+.doc-header.doctorado {
+    background-color: #c69c9c !important; /* Rosa viejo */
+    color: white !important;
+}
+
+/* Color Maestría */
+.doc-header.maestria {
+    background-color: #924c1f !important; /* Café rojizo */
+    color: white !important;
+}
+
+/* Color Licenciatura */
+.doc-header.licenciatura {
+    background-color: #6b4f2c !important; /* Café oscuro */
+    color: white !important;
+}
+
+/* Color Licenciatura */
+.doc-header.cursos {
+    background-color: #3d2c6b !important; /* Café oscuro */
+    color: white !important;
+}
+
+/* Efecto hover */
+.doc-header:hover {
+    opacity: 0.8;
+}
+
+.doc-header {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.doc-header i {
+    transition: transform 0.3s;
+}
+
+.doc-header.open i {
+    transform: rotate(180deg);
+}
+
+.doc-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.doc-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.doc-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.doc-info {
+    font-size: 16px;
+    color: #333;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* --- Botones de Documentos --- */
+.doc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.doc-btn.ver {
+    background-color: #3498db;
+    color: white;
+}
+
+.doc-btn.ver:hover {
+    background-color: #217dbb;
+    transform: scale(1.05);
+}
+
+.doc-btn.descargar {
+    background-color: #27ae60;
+    color: white;
+}
+
+.doc-btn.descargar:hover {
+    background-color: #1e8449;
+    transform: scale(1.05);
+}
+
+/* --- Ajuste para pantallas pequeñas --- */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    main.content {
+        margin-left: 0;
+    }
+
+    .profile-container {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .documents {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .doc-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .doc-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* Estilos para el modal de imagen */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Permite hacer zoom con el scroll */
+.zoomable-image {
+    cursor: zoom-in;
+    transition: transform 0.3s;
+}
+
+.zoomable-image.zoomed {
+    transform: scale(1.5);
+    cursor: zoom-out;
+}
+/* Estilos mejorados para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    overflow: auto;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    padding: 20px;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    background: rgba(0,0,0,0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.caption {
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+}

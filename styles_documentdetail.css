@@ -1,0 +1,490 @@
+//* ==================== /* ==================== */
+/* ESTILOS BASE Y RESET */
+/* ==================== */
+html, body {
+    height: 100vh; /* Altura completa de la ventana */
+    overflow: hidden; /* Evita scroll no deseado */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Color de fondo suave */
+    display: flex;
+    box-sizing: border-box; /* Modelo de caja más intuitivo */
+}
+
+/* ==================== */
+/* BARRA LATERAL (SIDEBAR) */
+/* ==================== */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f; /* Color dorado principal */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto; /* Scroll vertical si es necesario */
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000; /* Asegura que esté por encima del contenido */
+}
+
+/* Estado colapsado del sidebar */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 0;
+    overflow: hidden;
+    transition: transform 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+/* Estilos para el título del sidebar */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+/* Estilos para la descripción del sidebar */
+.sidebar p {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Menú de navegación */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Enlaces del menú */
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Efecto hover para enlaces */
+.sidebar a:hover {
+    background-color: #8c5d15; /* Color dorado más oscuro */
+}
+
+/* Iconos en el menú */
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Botón de cerrar sesión */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121; /* Rojo para acción importante */
+}
+
+/* ==================== */
+/* BOTÓN DE HAMBURGUESA */
+/* ==================== */
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8c5d15;
+    border: none;
+    cursor: pointer;
+    z-index: 1200; /* Por encima del sidebar */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #b27b1f;
+}
+
+/* ==================== */
+/* CONTENIDO PRINCIPAL */
+/* ==================== */
+.content {
+    margin-left: 270px; /* Espacio para el sidebar */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: margin-left 0.4s ease;
+    width: calc(100vw - 270px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estado cuando el sidebar está colapsado */
+.content.collapsed {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* ==================== */
+/* CONTENEDOR DE DETALLES */
+/* ==================== */
+.document-detail-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    width: 90%;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(178, 123, 31, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Título principal */
+.document-detail-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #b27b1f;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Línea decorativa bajo el título */
+.document-detail-container h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background: #b27b1f;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Efecto hover para el contenedor */
+.document-detail-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== */
+/* CONTENIDO DEL DOCUMENTO */
+/* ==================== */
+.document-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Información del documento */
+.document-info {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.document-info p {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+    background: #f9f9f9;
+    font-weight: 500;
+}
+
+/* Contenedor de la imagen/previsualización */
+.document-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del documento */
+.document-image img {
+    max-width: 100%;
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== */
+/* BOTONES DE ACCIÓN */
+/* ==================== */
+.document-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/* Estilo base para botones */
+.download-btn, .delete-btn, .back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+/* Botón de descarga */
+.download-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Botón de eliminar */
+.delete-btn {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #cc0000, #ff4444);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Botón de regresar */
+.back-btn {
+    background: linear-gradient(135deg, #b27b1f, #8a5f15);
+    color: white;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, #8a5f15, #b27b1f);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Iconos en botones */
+.download-btn i, .delete-btn i, .back-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Flecha de regreso */
+.back-arrow {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    color: white;
+    background: #d9534f;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
+
+.back-arrow:hover {
+    background: #c9302c;
+    transform: scale(1.1);
+}
+
+/* ==================== */
+/* MODAL DE CONFIRMACIÓN */
+/* ==================== */
+.confirm-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.confirm-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.confirm-btn {
+    background-color: #ff4444;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #cc0000;
+}
+
+.cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #bdbdbd;
+}
+
+/* ==================== */
+/* RESPONSIVE DESIGN */
+/* ==================== */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .document-detail-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .document-content {
+        flex-direction: column;
+    }
+
+    .document-info, .document-image {
+        min-width: 100%;
+    }
+
+    .document-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .download-btn, .delete-btn, .back-btn {
+        width: 100%;
+    }
+}
+
+/* ==================== */
+/* ANIMACIONES */
+/* ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+/* ESTILOS DE EMERGENCIA PARA BOTÓN ELIMINAR */
+#deleteBtn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    background: #ff4444 !important;
+}
+
+/* Forzar visibilidad en caso de herencia */
+.document-actions .delete-btn {
+    display: flex !important;
+    visibility: visible !important;
+}

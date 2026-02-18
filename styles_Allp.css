@@ -1,0 +1,591 @@
+/* --- Evitar desplazamiento horizontal --- */
+html, body {
+    height: 100vh;
+    overflow-y: auto; 
+    overflow-x: hidden; /* Asegura que no haya desplazamiento horizontal */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f9;
+    box-sizing: border-box;
+}
+
+/* --- Barra lateral fija sin desbordamiento --- */
+.sidebar {
+    width: 250px;
+    max-width: 250px;
+    background-color: #b27b1f; /* Color dorado */
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: transform 0.4s ease, width 0.4s ease;
+}
+
+/* --- Ocultar la barra lateral cuando está colapsada --- */
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 0;
+}
+
+/* --- Estilos del título y descripción en la barra lateral --- */
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.sidebar p {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* --- Menú de navegación --- */
+.sidebar .menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background-color: #8c5d15;
+}
+
+.sidebar a i {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* --- Botón de cerrar sesión --- */
+.sidebar .logout {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #b27b1f;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    background-color: #a02121;
+}
+
+/* --- Botón de hamburguesa fijo --- */
+.sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #8c5d15;
+    border: none;
+    cursor: pointer;
+    z-index: 1200;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #b27b1f;
+}
+
+
+/* --- Contenedor principal ajustado dinámicamente --- */
+.content {
+    max-width: calc(100% - 270px); /* Se ajusta al tamaño de la pantalla */
+    margin-left: 270px; /* Espacio para la barra lateral */
+    padding: 60px 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+    transition: margin-left 0.4s ease, max-width 0.4s ease;
+}
+
+/* --- Cuando la barra lateral está colapsada --- */
+.sidebar.collapsed + .content {
+    max-width: calc(100% - 80px); /* Reduce el ancho manteniendo el margen */
+    margin-left: 80px; /* Ajusta el margen en función del tamaño reducido */
+    transition: margin-left 0.4s ease, max-width 0.4s ease;
+}
+
+
+
+/* --- Estilo mejorado del título del contenido principal --- */
+.content-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    display: inline-block;
+    color: #b27b1f !important;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding-bottom: 5px;
+    border-bottom: 3px solid #8c5d15;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+}
+
+.content-title:hover {
+    color: #8c5d15;
+    border-bottom: 3px solid #b27b1f;
+}
+
+/* Contenedor que centra el título */
+.profiles-title-container {
+    display: flex;
+    justify-content: center; /* ✅ Centra horizontalmente */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* --- Título del apartado "Perfiles de Profesores" --- */
+.profiles-title {
+    font-size: 26px;
+    font-weight: bold;
+    
+    padding: 12px 25px;
+    color: white;
+    background: linear-gradient(to right, #b27b1f, #8c5d15);
+    border-radius: 8px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid #8c5d15;
+    letter-spacing: 1.5px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    
+    /* Centrado y ajuste de ancho */
+    display: inline-block;  /* Solo ocupa el ancho del contenido */
+    margin: 10 auto;         /* Centrar horizontalmente */
+    text-align: center;      /* Asegurar que el texto esté centrado */
+    max-width: 90%;         /* Evitar que el fondo se expanda demasiado */
+}
+
+.profiles-title:hover {
+    background: linear-gradient(to right, #8c5d15, #b27b1f);
+    transform: scale(1.05);
+}
+
+/* --- Eliminar subrayado azul en los enlaces de las tarjetas --- */
+.profile-card-link {
+    text-decoration: none;  /* Elimina el subrayado */
+    color: inherit;  /* Mantiene el color de texto */
+    display: block;  /* Hace que toda la carta sea clickeable */
+}
+
+/* --- Contenedor principal de perfiles --- */
+.profiles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Tarjetas de perfil --- */
+.profile-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-card {
+    width: 220px; /* Tamaño fijo */
+    height: 260px; /* Altura uniforme */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image {
+    width: 100%;
+    height: 180px; /* Mantiene tamaño uniforme */
+    object-fit: cover; /* Recorta la imagen sin deformarla */
+    border-radius: 10px 10px 0 0;
+}
+
+.profile-card h3 {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.profile-card p {
+    font-size: 12px;
+    margin: 2px 0; /* 🔹 Reduce espacio entre líneas */
+    line-height: 1.1;
+    color: #444;
+}
+
+/* --- Responsividad: Ajustar tarjetas en pantallas pequeñas --- */
+
+@media (max-width: 768px) {
+    .profiles-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* styles/styles_Allp.css */
+
+/* Nuevos estilos para el agrupamiento */
+.profile-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.profile-card {
+    width: 300px;
+    min-height: 350px;
+    flex: 0 0 calc(33.333% - 40px); /* 3 columnas con espacio */
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 1200px) {
+    .profile-card {
+        flex: 0 0 calc(50% - 40px); /* 2 columnas en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        flex: 0 0 100%; /* 1 columna en móviles */
+        max-width: 350px;
+    }
+    
+    .profile-row {
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+}
+/* Estilos para el contenedor principal */
+.profiles-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Fila de perfiles */
+.profile-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta individual */
+.profile-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 3px solid #b27b1f;
+}
+
+.profile-card h3 {
+    padding: 15px;
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .profile-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-image {
+        height: 300px;
+    }
+}
+
+.filters-form-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 2rem;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    margin: auto;
+}
+
+.filters-upload-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* ✅ Para que se acomode en pantallas pequeñas */
+    width: 100%;
+    margin-bottom: 30px;
+}
+/* Estilos para los filtros */
+.filters-container, 
+.formulario-container  {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
+}
+
+.filter-group {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.filters-container select,
+.filters-container button,
+.formulario-container select,
+.formulario-container input,
+.formulario-container button {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-btn, .clear-filter {
+    width: 100%;
+    background-color: #b27b1f;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 15px;
+}
+
+.search-btn:hover, .clear-filter:hover {
+    background-color: #8c5d15;
+}
+
+.clear-filter {
+    background-color: #e74c3c; /* Lila pastel */
+}
+
+.clear-filter:hover {
+    background-color: #c0392b;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters-form-wrapper {
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .filters-container,
+    .formulario-container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .filter-select {
+        width: 100%;
+    }
+    
+    .search-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --- Mejora del campo de subida de imagen --- */
+.upload-form-container form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.upload-form-container h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #8c5d15;
+}
+
+.upload-form-container .form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-form-container label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.upload-form-container select,
+.upload-form-container input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+.upload-form-container select:focus,
+.upload-form-container input[type="file"]:focus {
+    border-color: #b27b1f;
+    outline: none;
+}
+
+.upload-btn {
+    width: 100%;
+    background: linear-gradient(to right, #b27b1f, #8c5d15);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.upload-btn:hover {
+    background: linear-gradient(to right, #8c5d15, #b27b1f);
+    transform: scale(1.03);
+}
+
+.form-title {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #8c5d15;
+}
+
+/* --- Estilos Generales para Formularios (Editar, Agregar) --- */
+
+/* Reutilizamos el estilo del contenedor */
+.upload-form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Asegurar que los inputs de texto normales se vean bien */
+.upload-form-container input[type="text"] {
+    width: 100%; /* Ocupar todo el ancho disponible */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+    transition: border 0.3s ease;
+}
+
+.upload-form-container input[type="text"]:focus {
+    border-color: #b27b1f;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Estilo para el título en formularios */
+.content h2.content-title {
+    margin-bottom: 30px;
+    margin-top: 0;
+}
