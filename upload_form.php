@@ -191,29 +191,58 @@ if ($is_authorized) {
         });
 
         // Evento de envío AJAX
+// Evento de envío AJAX (CORREGIDO)
         uploadForm.addEventListener("submit", function(e) {
             e.preventDefault();
+
+            // 1. Validación manual del campo oculto "tipo_documento"
+            const tipoDocumento = document.getElementById("tipo_documento").value;
+            if (!tipoDocumento) {
+                alert("⚠️ Por favor, selecciona el tipo de documento (Acta, Horario u Otros).");
+                return;
+            }
+
+            // 2. Dar retroalimentación visual al usuario mientras sube
+            const submitBtn = document.querySelector(".button-save");
+            const textOriginal = submitBtn.textContent;
+            submitBtn.textContent = "Subiendo archivo... ⏳";
+            submitBtn.disabled = true; // Evita que den doble clic
+
             const formData = new FormData(this);
 
             fetch("upload.php", { method: "POST", body: formData })
-            .then(response => response.text()) // Capturamos como texto para depurar si hay errores
+            .then(response => response.text())
             .then(text => {
+                // Restauramos el botón a la normalidad
+                submitBtn.textContent = textOriginal;
+                submitBtn.disabled = false;
+
                 try {
                     const data = JSON.parse(text);
-                    alert(data.message);
+                    
                     if (data.status === 'success') {
-                        location.reload(); 
+                        // 3. Usar un ligero retraso para que el navegador NO bloquee el alert antes de recargar
+                        setTimeout(() => {
+                            alert(data.message); 
+                            window.location.reload(); 
+                        }, 100);
+                    } else {
+                        alert("❌ Ocurrió un problema: " + data.message);
                     }
-                } catch (e) {
+                } catch (err) {
                     console.error("Error parseando JSON. El servidor envió:", text);
-                    alert("⚠️ Error en la respuesta del servidor.");
+                    alert("⚠️ Error en el servidor. Revisa la consola (F12) para más detalles.");
                 }
             })
             .catch(err => {
+                // En caso de que se pierda la conexión a internet
+                submitBtn.textContent = textOriginal;
+                submitBtn.disabled = false;
                 console.error(err);
-                alert("❌ Error de conexión.");
+                alert("❌ Error de conexión al intentar subir el archivo.");
             });
         });
+
 
         // Manejo de Preview (Simplificado)
         const fileInput = document.getElementById("fileInput");
