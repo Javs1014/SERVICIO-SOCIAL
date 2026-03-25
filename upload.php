@@ -53,11 +53,10 @@ if ($tipo_documento === 'horario' && !empty($_POST['horario_tipo'])) {
 }
 
 // Sanitización de campos académicos
-$periodo = !empty($_POST['periodo']) ? htmlspecialchars($_POST['periodo'], ENT_QUOTES, 'UTF-8') : null;
-$anio = !empty($_POST['anio']) ? intval($_POST['anio']) : null;
-$clave_materia = !empty($_POST['clave_materia']) ? htmlspecialchars($_POST['clave_materia'], ENT_QUOTES, 'UTF-8') : null;
-$grupo = !empty($_POST['grupo']) ? htmlspecialchars($_POST['grupo'], ENT_QUOTES, 'UTF-8') : null;
-
+$periodo = !empty($_POST['periodo']) ? htmlspecialchars($_POST['periodo'], ENT_QUOTES, 'UTF-8') : 'NA';
+$anio = !empty($_POST['anio']) ? intval($_POST['anio']) : 0;
+$clave_materia = !empty($_POST['clave_materia']) ? htmlspecialchars($_POST['clave_materia'], ENT_QUOTES, 'UTF-8') : 'NA';
+$grupo = !empty($_POST['grupo']) ? htmlspecialchars($_POST['grupo'], ENT_QUOTES, 'UTF-8') : 'NA';
 // ==============================================
 // PROCESAMIENTO DEL ARCHIVO
 // ==============================================
